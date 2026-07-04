@@ -461,6 +461,9 @@ def main():
     log.info("=" * 60)
     log.info("Done. %d net-new reviews added to master.", len(net_new))
     log.info("=" * 60)
+    # end of main() in scraper.py
+    log.info("COMMIT_MSG: data: pipeline run %s (+%d reviews, %d skipped)",
+         datetime.now().strftime("%Y-%m-%d"), len(net_new), len(batch) - len(net_new))
 
 
 if __name__ == "__main__":
