@@ -1,0 +1,14 @@
+2026-07-04 07:26:11,463  INFO     ============================================================
+2026-07-04 07:26:11,463  INFO     EV Cleaner — 2026-07-04 07:26
+2026-07-04 07:26:11,464  INFO     ============================================================
+2026-07-04 07:26:11,481  INFO     Loaded 2081 rows from master_reviews.csv
+2026-07-04 07:26:11,481  INFO     Cleaning review text...
+2026-07-04 07:26:11,550  INFO       Dropped 0 rows that were empty after cleaning
+2026-07-04 07:26:11,550  INFO     Flagging short reviews...
+2026-07-04 07:26:11,572  INFO       Short reviews (< 5 words): 6
+2026-07-04 07:26:11,574  INFO       Missing ratings: 0
+2026-07-04 07:26:11,574  INFO     Deriving rating_sentiment from star ratings...
+2026-07-04 07:26:11,575  INFO       Distribution: {'positive': 1693, 'negative': 344, 'neutral': 44}
+2026-07-04 07:26:11,575  INFO     Parsing posted_date...
+2026-07-04 07:26:11,611  INFO     Clean data saved → /home/runner/work/ev-scooter-sentiment-analysis/ev-scooter-sentiment-analysis/data/clean_reviews.csv (2081 rows)
+2026-07-04 07:26:11,611  INFO     ============================================================

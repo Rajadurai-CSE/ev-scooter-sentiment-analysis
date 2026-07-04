@@ -1,0 +1,283 @@
+2026-07-04 07:15:19,479  INFO     ============================================================
+2026-07-04 07:15:19,479  INFO     EV Scraper — run date: 04-07-2026
+2026-07-04 07:15:19,479  INFO     ============================================================
+2026-07-04 07:15:19,479  INFO     ── TVS iQube ──────────────────────────
+2026-07-04 07:15:19,479  INFO       [91wheels] TVS iQube page 1
+2026-07-04 07:15:22,702  INFO       [91wheels] TVS iQube page 2
+2026-07-04 07:15:24,883  INFO       [91wheels] TVS iQube page 3
+2026-07-04 07:15:27,021  INFO       [91wheels] TVS iQube page 4
+2026-07-04 07:15:30,060  INFO       [91wheels] TVS iQube page 5
+2026-07-04 07:15:32,439  INFO       [91wheels] TVS iQube page 6
+2026-07-04 07:15:34,591  INFO       [91wheels] TVS iQube page 7
+2026-07-04 07:15:36,744  INFO       [91wheels] TVS iQube page 8
+2026-07-04 07:15:40,445  INFO       [91wheels] TVS iQube page 9
+2026-07-04 07:15:43,214  INFO       [91wheels] TVS iQube page 10
+2026-07-04 07:15:45,911  INFO       [91wheels] TVS iQube page 11
+2026-07-04 07:15:50,166  INFO       [91wheels] TVS iQube page 12
+2026-07-04 07:15:52,900  INFO       [91wheels] TVS iQube page 13
+2026-07-04 07:15:55,099  INFO       [91wheels] TVS iQube page 14
+2026-07-04 07:15:57,283  INFO       [91wheels] TVS iQube page 15
+2026-07-04 07:16:01,096  INFO       [91wheels] TVS iQube page 16
+2026-07-04 07:16:03,282  INFO       [91wheels] TVS iQube page 17
+2026-07-04 07:16:05,279  INFO       [91wheels] TVS iQube page 18
+2026-07-04 07:16:07,958  INFO       [91wheels] TVS iQube page 19
+2026-07-04 07:16:11,426  INFO       [91wheels] TVS iQube page 20
+2026-07-04 07:16:14,215  INFO       [91wheels] TVS iQube page 21
+2026-07-04 07:16:17,134  INFO       [91wheels] TVS iQube page 22
+2026-07-04 07:16:20,876  INFO       [91wheels] TVS iQube page 23
+2026-07-04 07:16:23,676  INFO       [91wheels] TVS iQube page 24
+2026-07-04 07:16:26,354  INFO       [91wheels] TVS iQube page 25
+2026-07-04 07:16:30,026  INFO       [91wheels] TVS iQube page 26
+2026-07-04 07:16:32,815  INFO       [91wheels] TVS iQube page 27
+2026-07-04 07:16:35,588  INFO       [91wheels] TVS iQube page 28
+2026-07-04 07:16:38,996  INFO       [91wheels] TVS iQube page 29
+2026-07-04 07:16:41,757  INFO       [91wheels] TVS iQube page 30
+2026-07-04 07:16:43,935  INFO       [91wheels] TVS iQube page 31
+2026-07-04 07:16:47,584  INFO       [91wheels] TVS iQube page 32
+2026-07-04 07:16:50,306  INFO       [91wheels] TVS iQube page 33
+2026-07-04 07:16:52,501  INFO       [91wheels] TVS iQube page 34
+2026-07-04 07:16:56,533  INFO       [91wheels] TVS iQube page 35
+2026-07-04 07:16:59,245  INFO       [91wheels] TVS iQube page 36
+2026-07-04 07:17:01,357  INFO       [91wheels] TVS iQube page 37
+2026-07-04 07:17:04,819  INFO       [91wheels] TVS iQube page 38
+2026-07-04 07:17:08,055  INFO       [91wheels] TVS iQube page 39
+2026-07-04 07:17:10,849  INFO       [91wheels] TVS iQube page 40
+2026-07-04 07:17:13,884  INFO       collected 205 rows
+2026-07-04 07:17:13,884  INFO       [bikewale] TVS iQube page 1
+2026-07-04 07:17:16,668  INFO       [bikewale] TVS iQube page 2
+2026-07-04 07:17:18,878  INFO       [bikewale] TVS iQube page 3
+2026-07-04 07:17:21,178  INFO       [bikewale] TVS iQube page 4
+2026-07-04 07:17:23,458  INFO       [bikewale] TVS iQube page 5
+2026-07-04 07:17:25,639  INFO       [bikewale] TVS iQube page 6
+2026-07-04 07:17:27,992  INFO       [bikewale] TVS iQube page 7
+2026-07-04 07:17:30,231  INFO       [bikewale] TVS iQube page 8
+2026-07-04 07:17:32,508  INFO       [bikewale] TVS iQube page 9
+2026-07-04 07:17:34,762  INFO       [bikewale] TVS iQube page 10
+2026-07-04 07:17:37,142  INFO       [bikewale] TVS iQube page 11
+2026-07-04 07:17:39,499  INFO       [bikewale] TVS iQube page 12
+2026-07-04 07:17:41,789  INFO       [bikewale] TVS iQube page 13
+2026-07-04 07:17:44,135  INFO       [bikewale] TVS iQube page 14
+2026-07-04 07:17:46,353  INFO       [bikewale] TVS iQube page 15
+2026-07-04 07:17:48,472  INFO       [bikewale] TVS iQube page 16
+2026-07-04 07:17:49,084  INFO       No cards on page 16 — end of results
+2026-07-04 07:17:49,089  INFO       collected 512 rows
+2026-07-04 07:17:49,090  INFO       [bikedekho] TVS iQube page 1
+2026-07-04 07:17:51,639  INFO       [bikedekho] TVS iQube page 2
+2026-07-04 07:17:54,231  INFO       [bikedekho] TVS iQube page 3
+2026-07-04 07:17:56,777  INFO       [bikedekho] TVS iQube page 4
+2026-07-04 07:17:59,272  INFO       [bikedekho] TVS iQube page 5
+2026-07-04 07:18:02,602  INFO       [bikedekho] TVS iQube page 6
+2026-07-04 07:18:05,117  INFO       [bikedekho] TVS iQube page 7
+2026-07-04 07:18:07,617  INFO       [bikedekho] TVS iQube page 8
+2026-07-04 07:18:10,115  INFO       [bikedekho] TVS iQube page 9
+2026-07-04 07:18:12,626  INFO       [bikedekho] TVS iQube page 10
+2026-07-04 07:18:15,138  INFO       [bikedekho] TVS iQube page 11
+2026-07-04 07:18:18,422  INFO       [bikedekho] TVS iQube page 12
+2026-07-04 07:18:20,930  INFO       [bikedekho] TVS iQube page 13
+2026-07-04 07:18:24,233  INFO       [bikedekho] TVS iQube page 14
+2026-07-04 07:18:26,730  INFO       [bikedekho] TVS iQube page 15
+2026-07-04 07:18:29,241  INFO       [bikedekho] TVS iQube page 16
+2026-07-04 07:18:31,818  INFO       [bikedekho] TVS iQube page 17
+2026-07-04 07:18:34,312  INFO       [bikedekho] TVS iQube page 18
+2026-07-04 07:18:37,223  INFO       collected 513 rows
+2026-07-04 07:18:37,223  INFO     ── Ather Rizta ──────────────────────────
+2026-07-04 07:18:37,223  INFO       [91wheels] Ather Rizta page 1
+2026-07-04 07:18:39,423  INFO       [91wheels] Ather Rizta page 2
+2026-07-04 07:18:41,089  INFO       [91wheels] Ather Rizta page 3
+2026-07-04 07:18:43,753  INFO       [91wheels] Ather Rizta page 4
+2026-07-04 07:18:47,355  INFO       [91wheels] Ather Rizta page 5
+2026-07-04 07:18:49,417  INFO       [91wheels] Ather Rizta page 6
+2026-07-04 07:18:52,115  INFO       [91wheels] Ather Rizta page 7
+2026-07-04 07:18:55,818  INFO       [91wheels] Ather Rizta page 8
+2026-07-04 07:18:57,927  INFO       [91wheels] Ather Rizta page 9
+2026-07-04 07:19:00,616  INFO       [91wheels] Ather Rizta page 10
+2026-07-04 07:19:04,444  INFO       [91wheels] Ather Rizta page 11
+2026-07-04 07:19:07,196  INFO       [91wheels] Ather Rizta page 12
+2026-07-04 07:19:09,810  INFO       [91wheels] Ather Rizta page 13
+2026-07-04 07:19:13,119  INFO       [91wheels] Ather Rizta page 14
+2026-07-04 07:19:15,820  INFO       [91wheels] Ather Rizta page 15
+2026-07-04 07:19:18,496  INFO       [91wheels] Ather Rizta page 16
+2026-07-04 07:19:22,246  INFO       [91wheels] Ather Rizta page 17
+2026-07-04 07:19:24,948  INFO       [91wheels] Ather Rizta page 18
+2026-07-04 07:19:27,035  INFO       [91wheels] Ather Rizta page 19
+2026-07-04 07:19:30,432  INFO       [91wheels] Ather Rizta page 20
+2026-07-04 07:19:33,300  INFO       [91wheels] Ather Rizta page 21
+2026-07-04 07:19:36,004  INFO       [91wheels] Ather Rizta page 22
+2026-07-04 07:19:37,892  INFO       [91wheels] Ather Rizta page 23
+2026-07-04 07:19:40,911  INFO       [91wheels] Ather Rizta page 24
+2026-07-04 07:19:43,050  INFO       [91wheels] Ather Rizta page 25
+2026-07-04 07:19:44,948  INFO       [91wheels] Ather Rizta page 26
+2026-07-04 07:19:47,646  INFO       [91wheels] Ather Rizta page 27
+2026-07-04 07:19:51,390  INFO       [91wheels] Ather Rizta page 28
+2026-07-04 07:19:52,075  INFO       No cards on page 28 — end of results
+2026-07-04 07:19:52,079  INFO       collected 140 rows
+2026-07-04 07:19:52,079  INFO       [bikewale] Ather Rizta page 1
+2026-07-04 07:19:54,499  INFO       [bikewale] Ather Rizta page 2
+2026-07-04 07:19:56,749  INFO       [bikewale] Ather Rizta page 3
+2026-07-04 07:19:59,045  INFO       [bikewale] Ather Rizta page 4
+2026-07-04 07:20:01,185  INFO       [bikewale] Ather Rizta page 5
+2026-07-04 07:20:01,774  INFO       No cards on page 5 — end of results
+2026-07-04 07:20:01,778  INFO       collected 116 rows
+2026-07-04 07:20:01,778  INFO       [bikedekho] Ather Rizta page 1
+2026-07-04 07:20:04,323  INFO       [bikedekho] Ather Rizta page 2
+2026-07-04 07:20:06,844  INFO       [bikedekho] Ather Rizta page 3
+2026-07-04 07:20:09,356  INFO       [bikedekho] Ather Rizta page 4
+2026-07-04 07:20:12,912  INFO       [bikedekho] Ather Rizta page 5
+2026-07-04 07:20:15,650  INFO       [bikedekho] Ather Rizta page 6
+2026-07-04 07:20:18,474  INFO       [bikedekho] Ather Rizta page 7
+2026-07-04 07:20:22,071  INFO       [bikedekho] Ather Rizta page 8
+2026-07-04 07:20:24,836  INFO       [bikedekho] Ather Rizta page 9
+2026-07-04 07:20:27,672  INFO       [bikedekho] Ather Rizta page 10
+2026-07-04 07:20:30,469  INFO       [bikedekho] Ather Rizta page 11
+2026-07-04 07:20:33,943  INFO       [bikedekho] Ather Rizta page 12
+2026-07-04 07:20:36,681  INFO       [bikedekho] Ather Rizta page 13
+2026-07-04 07:20:39,491  INFO       [bikedekho] Ather Rizta page 14
+2026-07-04 07:20:42,212  INFO       [bikedekho] Ather Rizta page 15
+2026-07-04 07:20:44,971  INFO       [bikedekho] Ather Rizta page 16
+2026-07-04 07:20:48,514  INFO       [bikedekho] Ather Rizta page 17
+2026-07-04 07:20:51,276  INFO       [bikedekho] Ather Rizta page 18
+2026-07-04 07:20:54,019  INFO       collected 533 rows
+2026-07-04 07:20:54,019  INFO     ── Ola S1X ──────────────────────────
+2026-07-04 07:20:54,019  INFO       [91wheels] Ola S1X page 1
+2026-07-04 07:21:09,173  WARNING    Request error: HTTPSConnectionPool(host='www.91wheels.com', port=443): Read timed out. (read timeout=15)
+2026-07-04 07:21:09,174  INFO       [bikewale] Ola S1X page 1
+2026-07-04 07:21:11,526  INFO       [bikewale] Ola S1X page 2
+2026-07-04 07:21:13,778  INFO       [bikewale] Ola S1X page 3
+2026-07-04 07:21:16,113  INFO       [bikewale] Ola S1X page 4
+2026-07-04 07:21:16,632  INFO       No cards on page 4 — end of results
+2026-07-04 07:21:16,635  INFO       collected 88 rows
+2026-07-04 07:21:16,635  INFO       [bikedekho] Ola S1X page 1
+2026-07-04 07:21:19,126  INFO       [bikedekho] Ola S1X page 2
+2026-07-04 07:21:21,574  INFO       [bikedekho] Ola S1X page 3
+2026-07-04 07:21:24,017  INFO       [bikedekho] Ola S1X page 4
+2026-07-04 07:21:26,458  INFO       [bikedekho] Ola S1X page 5
+2026-07-04 07:21:29,126  INFO       [bikedekho] Ola S1X page 6
+2026-07-04 07:21:31,820  INFO       [bikedekho] Ola S1X page 7
+2026-07-04 07:21:35,176  INFO       [bikedekho] Ola S1X page 8
+2026-07-04 07:21:37,928  INFO       [bikedekho] Ola S1X page 9
+2026-07-04 07:21:40,620  INFO       [bikedekho] Ola S1X page 10
+2026-07-04 07:21:43,268  INFO       [bikedekho] Ola S1X page 11
+2026-07-04 07:21:45,884  INFO       [bikedekho] Ola S1X page 12
+2026-07-04 07:21:48,494  INFO       [bikedekho] Ola S1X page 13
+2026-07-04 07:21:51,190  INFO       [bikedekho] Ola S1X page 14
+2026-07-04 07:21:53,844  INFO       [bikedekho] Ola S1X page 15
+2026-07-04 07:21:56,494  INFO       [bikedekho] Ola S1X page 16
+2026-07-04 07:21:59,170  INFO       [bikedekho] Ola S1X page 17
+2026-07-04 07:22:01,830  INFO       [bikedekho] Ola S1X page 18
+2026-07-04 07:22:05,231  INFO       collected 524 rows
+2026-07-04 07:22:05,231  INFO     ── Bajaj Chetak ──────────────────────────
+2026-07-04 07:22:05,231  INFO       [91wheels] Bajaj Chetak page 1
+2026-07-04 07:22:07,994  INFO       [91wheels] Bajaj Chetak page 2
+2026-07-04 07:22:10,723  INFO       [91wheels] Bajaj Chetak page 3
+2026-07-04 07:22:13,520  INFO       [91wheels] Bajaj Chetak page 4
+2026-07-04 07:22:16,355  INFO       [91wheels] Bajaj Chetak page 5
+2026-07-04 07:22:18,660  INFO       [91wheels] Bajaj Chetak page 6
+2026-07-04 07:22:21,120  INFO       [91wheels] Bajaj Chetak page 7
+2026-07-04 07:22:24,135  INFO       [91wheels] Bajaj Chetak page 8
+2026-07-04 07:22:26,596  INFO       [91wheels] Bajaj Chetak page 9
+2026-07-04 07:22:29,394  INFO       [91wheels] Bajaj Chetak page 10
+2026-07-04 07:22:32,419  INFO       [91wheels] Bajaj Chetak page 11
+2026-07-04 07:22:35,192  INFO       [91wheels] Bajaj Chetak page 12
+2026-07-04 07:22:38,213  INFO       [91wheels] Bajaj Chetak page 13
+2026-07-04 07:22:40,396  INFO       [91wheels] Bajaj Chetak page 14
+2026-07-04 07:22:43,148  INFO       [91wheels] Bajaj Chetak page 15
+2026-07-04 07:22:45,497  INFO       [91wheels] Bajaj Chetak page 16
+2026-07-04 07:22:47,855  INFO       [91wheels] Bajaj Chetak page 17
+2026-07-04 07:22:50,715  INFO       [91wheels] Bajaj Chetak page 18
+2026-07-04 07:22:53,452  INFO       [91wheels] Bajaj Chetak page 19
+2026-07-04 07:22:56,408  INFO       [91wheels] Bajaj Chetak page 20
+2026-07-04 07:22:59,089  INFO       [91wheels] Bajaj Chetak page 21
+2026-07-04 07:23:01,783  INFO       [91wheels] Bajaj Chetak page 22
+2026-07-04 07:23:04,558  INFO       [91wheels] Bajaj Chetak page 23
+2026-07-04 07:23:06,781  INFO       [91wheels] Bajaj Chetak page 24
+2026-07-04 07:23:09,512  INFO       [91wheels] Bajaj Chetak page 25
+2026-07-04 07:23:12,235  INFO       [91wheels] Bajaj Chetak page 26
+2026-07-04 07:23:14,385  INFO       [91wheels] Bajaj Chetak page 27
+2026-07-04 07:23:17,153  INFO       [91wheels] Bajaj Chetak page 28
+2026-07-04 07:23:19,856  INFO       [91wheels] Bajaj Chetak page 29
+2026-07-04 07:23:21,976  INFO       [91wheels] Bajaj Chetak page 30
+2026-07-04 07:23:24,624  INFO       [91wheels] Bajaj Chetak page 31
+2026-07-04 07:23:27,235  INFO       [91wheels] Bajaj Chetak page 32
+2026-07-04 07:23:29,925  INFO       [91wheels] Bajaj Chetak page 33
+2026-07-04 07:23:32,714  INFO       [91wheels] Bajaj Chetak page 34
+2026-07-04 07:23:35,059  INFO       [91wheels] Bajaj Chetak page 35
+2026-07-04 07:23:36,997  INFO       [91wheels] Bajaj Chetak page 36
+2026-07-04 07:23:38,150  INFO       No cards on page 36 — end of results
+2026-07-04 07:23:38,154  INFO       collected 179 rows
+2026-07-04 07:23:38,154  INFO       [bikewale] Bajaj Chetak page 1
+2026-07-04 07:23:40,437  INFO       [bikewale] Bajaj Chetak page 2
+2026-07-04 07:23:43,432  INFO       [bikewale] Bajaj Chetak page 3
+2026-07-04 07:23:45,829  INFO       [bikewale] Bajaj Chetak page 4
+2026-07-04 07:23:48,091  INFO       [bikewale] Bajaj Chetak page 5
+2026-07-04 07:23:50,396  INFO       [bikewale] Bajaj Chetak page 6
+2026-07-04 07:23:53,413  INFO       [bikewale] Bajaj Chetak page 7
+2026-07-04 07:23:55,605  INFO       [bikewale] Bajaj Chetak page 8
+2026-07-04 07:23:57,792  INFO       [bikewale] Bajaj Chetak page 9
+2026-07-04 07:24:00,218  INFO       [bikewale] Bajaj Chetak page 10
+2026-07-04 07:24:02,444  INFO       [bikewale] Bajaj Chetak page 11
+2026-07-04 07:24:04,688  INFO       [bikewale] Bajaj Chetak page 12
+2026-07-04 07:24:06,977  INFO       [bikewale] Bajaj Chetak page 13
+2026-07-04 07:24:07,534  INFO       No cards on page 13 — end of results
+2026-07-04 07:24:07,539  INFO       collected 412 rows
+2026-07-04 07:24:07,539  INFO       [bikedekho] Bajaj Chetak page 1
+2026-07-04 07:24:10,128  INFO       [bikedekho] Bajaj Chetak page 2
+2026-07-04 07:24:12,692  INFO       [bikedekho] Bajaj Chetak page 3
+2026-07-04 07:24:15,180  INFO       [bikedekho] Bajaj Chetak page 4
+2026-07-04 07:24:17,669  INFO       [bikedekho] Bajaj Chetak page 5
+2026-07-04 07:24:20,928  INFO       [bikedekho] Bajaj Chetak page 6
+2026-07-04 07:24:23,609  INFO       [bikedekho] Bajaj Chetak page 7
+2026-07-04 07:24:26,473  INFO       [bikedekho] Bajaj Chetak page 8
+2026-07-04 07:24:29,144  INFO       [bikedekho] Bajaj Chetak page 9
+2026-07-04 07:24:31,867  INFO       [bikedekho] Bajaj Chetak page 10
+2026-07-04 07:24:34,731  INFO       [bikedekho] Bajaj Chetak page 11
+2026-07-04 07:24:37,491  INFO       [bikedekho] Bajaj Chetak page 12
+2026-07-04 07:24:40,135  INFO       [bikedekho] Bajaj Chetak page 13
+2026-07-04 07:24:42,776  INFO       [bikedekho] Bajaj Chetak page 14
+2026-07-04 07:24:46,151  INFO       [bikedekho] Bajaj Chetak page 15
+2026-07-04 07:24:48,796  INFO       [bikedekho] Bajaj Chetak page 16
+2026-07-04 07:24:51,464  INFO       [bikedekho] Bajaj Chetak page 17
+2026-07-04 07:24:54,156  INFO       [bikedekho] Bajaj Chetak page 18
+2026-07-04 07:24:56,836  INFO       collected 532 rows
+2026-07-04 07:24:56,836  INFO     ── Hero Vida V2 ──────────────────────────
+2026-07-04 07:24:56,836  INFO       [91wheels] Hero Vida V2 page 1
+2026-07-04 07:24:59,503  INFO       [91wheels] Hero Vida V2 page 2
+2026-07-04 07:25:02,186  INFO       [91wheels] Hero Vida V2 page 3
+2026-07-04 07:25:05,039  INFO       [91wheels] Hero Vida V2 page 4
+2026-07-04 07:25:07,852  INFO       [91wheels] Hero Vida V2 page 5
+2026-07-04 07:25:10,623  INFO       [91wheels] Hero Vida V2 page 6
+2026-07-04 07:25:13,257  INFO       [91wheels] Hero Vida V2 page 7
+2026-07-04 07:25:15,304  INFO       [91wheels] Hero Vida V2 page 8
+2026-07-04 07:25:15,936  INFO       No cards on page 8 — end of results
+2026-07-04 07:25:15,939  INFO       collected 39 rows
+2026-07-04 07:25:15,939  INFO       [bikewale] Hero Vida V2 page 1
+2026-07-04 07:25:18,245  INFO       [bikewale] Hero Vida V2 page 2
+2026-07-04 07:25:20,367  INFO       [bikewale] Hero Vida V2 page 3
+2026-07-04 07:25:20,942  INFO       No cards on page 3 — end of results
+2026-07-04 07:25:20,945  INFO       collected 52 rows
+2026-07-04 07:25:20,945  INFO       [bikedekho] Hero Vida V2 page 1
+2026-07-04 07:25:23,482  INFO       [bikedekho] Hero Vida V2 page 2
+2026-07-04 07:25:25,992  INFO       [bikedekho] Hero Vida V2 page 3
+2026-07-04 07:25:29,249  INFO       [bikedekho] Hero Vida V2 page 4
+2026-07-04 07:25:31,967  INFO       [bikedekho] Hero Vida V2 page 5
+2026-07-04 07:25:34,647  INFO       [bikedekho] Hero Vida V2 page 6
+2026-07-04 07:25:37,353  INFO       [bikedekho] Hero Vida V2 page 7
+2026-07-04 07:25:39,997  INFO       [bikedekho] Hero Vida V2 page 8
+2026-07-04 07:25:42,696  INFO       [bikedekho] Hero Vida V2 page 9
+2026-07-04 07:25:45,375  INFO       [bikedekho] Hero Vida V2 page 10
+2026-07-04 07:25:48,853  INFO       [bikedekho] Hero Vida V2 page 11
+2026-07-04 07:25:51,526  INFO       [bikedekho] Hero Vida V2 page 12
+2026-07-04 07:25:54,282  INFO       [bikedekho] Hero Vida V2 page 13
+2026-07-04 07:25:56,943  INFO       [bikedekho] Hero Vida V2 page 14
+2026-07-04 07:25:59,578  INFO       [bikedekho] Hero Vida V2 page 15
+2026-07-04 07:26:02,949  INFO       [bikedekho] Hero Vida V2 page 16
+2026-07-04 07:26:05,578  INFO       [bikedekho] Hero Vida V2 page 17
+2026-07-04 07:26:08,207  INFO       [bikedekho] Hero Vida V2 page 18
+2026-07-04 07:26:10,892  INFO       collected 535 rows
+2026-07-04 07:26:11,033  INFO     Within-batch dedup: 4380 → 1753 rows
+2026-07-04 07:26:11,046  INFO     Master: 1806 rows | Batch: 1753 | Net-new: 275 | Duplicates skipped: 1478
+2026-07-04 07:26:11,067  INFO     Master saved → /home/runner/work/ev-scooter-sentiment-analysis/ev-scooter-sentiment-analysis/data/master_reviews.csv (2081 total rows)
+2026-07-04 07:26:11,069  INFO     Batch saved → /home/runner/work/ev-scooter-sentiment-analysis/ev-scooter-sentiment-analysis/data/batches/20260704_batch.csv
+2026-07-04 07:26:11,070  INFO     ============================================================
+2026-07-04 07:26:11,070  INFO     Done. 275 net-new reviews added to master.
+2026-07-04 07:26:11,070  INFO     ============================================================
+2026-07-04 07:26:11,070  INFO     COMMIT_MSG: data: pipeline run 2026-07-04 (+275 reviews, 1478 skipped)
