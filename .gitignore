@@ -5,3 +5,22 @@ __pycache__/
 
 # Virtual environments
 virtualenv/
+
+# Local data
+data/
+
+# Logs
+logs/
+
+#Models
+models/
+
+#Ipynb
+# Jupyter notebooks
+test.ipynb
+
+.vscode/
+
+.env
+
+

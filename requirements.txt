@@ -1,4 +1,21 @@
+--extra-index-url https://download.pytorch.org/whl/cu130
+
+torch
+torchvision
 cloudscraper
 pandas
 requests
 beautifulsoup4
+transformers
+bertopic
+sentence-transformers 
+umap-learn
+hdbscan
+streamlit 
+plotly 
+wordcloud
+googletrans
+ipynb
+scikit-learn
+google-genai
+boto3

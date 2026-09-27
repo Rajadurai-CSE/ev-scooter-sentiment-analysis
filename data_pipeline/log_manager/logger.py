@@ -3,11 +3,11 @@ from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 from datetime import datetime
 
-BASE_DIR = Path(__file__).parent
+BASE_DIR = Path(__file__).parent.parent.parent
 LOGS_DIR = BASE_DIR / "logs"
 LOGS_DIR.mkdir(parents=True, exist_ok=True)
-timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M')
-log_file_path = LOGS_DIR / f"scraper_log_{timestamp}.log"
+
+log_file_path = LOGS_DIR / f"application.log"
 file_handler = TimedRotatingFileHandler(
     filename=log_file_path,
     when="midnight",
@@ -20,8 +20,9 @@ console_handler = logging.StreamHandler()
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s  %(levelname)-7s  %(message)s",
+    format="%(asctime)s %(levelname)-8s [%(name)s] %(message)s",
     handlers=[file_handler,console_handler]
 )
 
-log = logging.getLogger("ev_scraper")
+def get_logger(name:str):
+    return logging.getLogger(name)

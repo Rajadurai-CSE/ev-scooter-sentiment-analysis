@@ -1,60 +1,39 @@
-"""
-EV Sentiment — Scraper Pipeline
-================================
-Sources : 91Wheels · Bikewale · Bikedekho
-Models  : TVS iQube · Ather Rizta · Ola S1X · Bajaj Chetak · Hero Vida V2
-
-Run     : python scraper.py
-Schedule: every 2 weeks via cron —  0 2 1,15 * *  python /path/scraper.py
-Output  : data/master_reviews.csv  (cumulative, deduped)
-          data/batches/<YYYYMMDD>_batch.csv  (each run's net-new rows)
-"""
-
 import re
 import json
 import time
 import hashlib
-from logger import log
 import requests
 import cloudscraper
 import pandas as pd
-
 from pathlib import Path
 from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
+from log_manager.logger import get_logger
+log = get_logger(__name__)
 
+import data_quality_ch as dqc
 
-# # ── Logging ──────────────────────────────────────────────────────────────────
-# logging.basicConfig(
-#     level=logging.INFO,
-#     format="%(asctime)s  %(levelname)-7s  %(message)s",
-# )
-
-
-# ── Paths ─────────────────────────────────────────────────────────────────────
-BASE_DIR    = Path(__file__).parent
+BASE_DIR    = Path(__file__).parent.parent
 DATA_DIR    = BASE_DIR / "data"
-BATCH_DIR   = DATA_DIR / "batches"
+# BATCH_DIR   = DATA_DIR / "batches"
 MASTER_PATH = DATA_DIR / "master_reviews.csv"
+# DRIFT_STATS_DIR = DATA_DIR/"drift_stats"
 
 DATA_DIR.mkdir(exist_ok=True)
-BATCH_DIR.mkdir(exist_ok=True)
+# BATCH_DIR.mkdir(exist_ok=True)
+# DRIFT_STATS_DIR.mkdir(exist_ok=True)
 
-# ── Schema ────────────────────────────────────────────────────────────────────
+
 # Only these columns are kept in the final dataset
 FINAL_COLS = ["review_id", "brand", "model", "source",
               "user_name", "review_text", "rating",
               "posted_date", "scraped_at"]
 
 
-# ═════════════════════════════════════════════════════════════════════════════
+
 class Scraper:
 
-    # ── Config ────────────────────────────────────────────────────────────────
-    #
-    # urls[model] = [91wheels_url, bikewale_url, bikedekho_url]
-    # Use {i} as the page placeholder.
-    #
+
     MODELS = {
         "TVS iQube": [
             "https://www.91wheels.com/scooters/tvs/iqube-electric/reviews/page{i}",
@@ -83,7 +62,6 @@ class Scraper:
         ],
     }
 
-    # Brand lookup (derived from model name)
     BRAND_MAP = {
         "TVS iQube":   "TVS",
         "Ather Rizta": "Ather",
@@ -92,14 +70,13 @@ class Scraper:
         "Hero Vida V2":"Hero",
     }
 
-    # Max pages to scrape per (model, source) — tune per site
+
     MAX_PAGES = {
         "91wheels":  40,
         "bikewale":  25,
         "bikedekho": 18,
     }
 
-    # 91Wheels CSS selectors
     WHEELS91_TAGS = {
         "user_name":   "span.text-sm.text-darkblack\\/80",
         "rating":      "span.text-xs.font-medium.text-gray-700",
@@ -107,22 +84,17 @@ class Scraper:
         "review_text": "div.text-sm.text-gray-700.leading-relaxed",
     }
 
-    # ── Init ──────────────────────────────────────────────────────────────────
     def __init__(self):
+        self.feature_drifted = False
         self.scraped_at = datetime.now().strftime("%d-%m-%Y")
-        # BUG FIX: store as datetime object, not string, for timedelta math
         self._now = datetime.now()
         self._cloud = cloudscraper.create_scraper(
             browser={"browser": "chrome", "platform": "windows", "desktop": True}
         )
 
-    # ── Date helpers ──────────────────────────────────────────────────────────
 
     def _relative_to_date(self, date_str: str) -> str:
-        """
-        Converts relative strings like '2 weeks ago', '1 year ago', '3 days ago'
-        into DD-MM-YYYY.
-        """
+
         parts = date_str.lower().strip().split()
         try:
             n = int(parts[0])
@@ -136,11 +108,12 @@ class Scraper:
         except (ValueError, IndexError):
             return self._now.strftime("%d-%m-%Y")
 
-    @staticmethod
-    def _bikedekho_date(date_str: str) -> str:
+    
+    def _bikedekho_date(self,date_str: str) -> str:
         """Convert 'Nov 25, 2025' → '25-11-2025'."""
-        # BUG FIX: 'return' keyword removed from lambda — put logic here
         try:
+            if len(date_str) == 0:
+                return self.scraped_at
             return datetime.strptime(date_str, "%b %d, %Y").strftime("%d-%m-%Y")
         except ValueError:
             return date_str
@@ -152,7 +125,6 @@ class Scraper:
         raw = f"{source}::{user_name.lower().strip()}::{review_text[:100].strip()}"
         return hashlib.md5(raw.encode()).hexdigest()
 
-    # ── 91Wheels scraper ──────────────────────────────────────────────────────
 
     def _scrape_91wheels(self, url_template: str, model: str) -> pd.DataFrame:
 
@@ -204,16 +176,9 @@ class Scraper:
         df["rating"]     = pd.to_numeric(df["rating"], errors="coerce")
         return df
 
-    # ── Bikedekho scraper ─────────────────────────────────────────────────────
 
     def _scrape_bikedekho(self, url_template: str, model: str) -> pd.DataFrame:
-        """
-        BUG FIX 1: url mutated inside loop
-        BUG FIX 2: wrong variable name (final_bikedekho_scrapper)
-        BUG FIX 3: 'return' in lambda
-        BUG FIX 4: df built inside loop — only last page kept
-        BUG FIX 5: returns df
-        """
+
         rows = []
         source = "bikedekho"
         max_pages = self.MAX_PAGES[source]
@@ -270,7 +235,7 @@ class Scraper:
         if not rows:
             return pd.DataFrame()
 
-        df = pd.DataFrame(rows)                         # BUG FIX: built outside loop
+        df = pd.DataFrame(rows)                         
         df["posted_date"] = df["posted_date"].apply(self._bikedekho_date)
         df["source"]     = source
         df["model"]      = model
@@ -279,7 +244,6 @@ class Scraper:
         df["rating"]     = pd.to_numeric(df["rating"], errors="coerce")
         return df
 
-    # ── Bikewale scraper ──────────────────────────────────────────────────────
 
     def _scrape_bikewale(self, url_template: str, model: str) -> pd.DataFrame:
 
@@ -343,7 +307,6 @@ class Scraper:
         df["rating"]     = pd.to_numeric(df["rating"], errors="coerce")
         return df
 
-    # ── Run scraper ───────────────────────────────────────────────────────────
 
     def run(self) -> pd.DataFrame:
         log.info("=" * 60)
@@ -374,9 +337,25 @@ class Scraper:
 
         batch = pd.concat(all_dfs, ignore_index=True)
         batch = self._clean_batch(batch)
-        return batch
 
-    # ── Cleaning ──────────────────────────────────────────────────────────────
+        #If master path exists
+        if Path.exists(MASTER_PATH) and len(pd.read_csv(MASTER_PATH)) > 0:
+            log.info("Started Drift detection ...")
+            existing_ids = set(master["review_id"])
+            net_new = batch[~batch["review_id"].isin(existing_ids)]
+            #2. Drift detection ...
+            feature_drift = dqc.feature_drift(net_new)
+            if feature_drift:
+                self.feature_drifted = True
+            else:
+                log.info("No Feature Drift detected.. proceeding to data drift")
+                #Run data drift detection
+                data_drift_stats = dqc.detect_data_drift(net_new)
+                log.info("Going to save Drift stats")
+                self.save_drift_data(data_drift_stats)
+
+
+        return batch
 
     def _clean_batch(self, df: pd.DataFrame) -> pd.DataFrame:
         """Normalise and deduplicate within a single scraped batch."""
@@ -409,17 +388,13 @@ class Scraper:
         log.info("Within-batch dedup: %d → %d rows", before, len(df))
 
         return df[FINAL_COLS]
+    
 
-    # ── Merge with master ─────────────────────────────────────────────────────
+    def check_batch(self,batch: pd.DataFrame) -> pd.DataFrame:
 
-    def merge_with_master(self, batch: pd.DataFrame) -> pd.DataFrame:
-        """
-        Appends net-new reviews to the master dataset.
-        Reviews already in master (matched by review_id) are skipped.
-        """
         if batch.empty:
             log.info("Empty batch — nothing to merge.")
-            return pd.DataFrame()
+            net_new = pd.DataFrame()
 
         if MASTER_PATH.exists():
             master = pd.read_csv(MASTER_PATH, dtype=str)
@@ -429,41 +404,52 @@ class Scraper:
                      len(master), len(batch), len(net_new), len(batch) - len(net_new))
             if net_new.empty:
                 log.info("No new reviews this run.")
-                return net_new
-            updated = pd.concat([master, net_new], ignore_index=True)
         else:
             log.info("No master yet — creating from this batch (%d rows)", len(batch))
+            master = pd.DataFrame()
             net_new = batch
-            updated = batch
 
+        return master,net_new
+
+
+    def merge_with_master(self, master:pd.DataFrame, net_new: pd.DataFrame):
+        updated = pd.concat([master, net_new], ignore_index=True)
         updated.to_csv(MASTER_PATH, index=False, encoding="utf-8-sig")
         log.info("Master saved → %s (%d total rows)", MASTER_PATH, len(updated))
-        return net_new
-
-    # ── Save batch ────────────────────────────────────────────────────────────
+        
 
     def save_batch(self, net_new: pd.DataFrame):
         if net_new.empty:
             return
-        today = datetime.now().strftime("%Y%m%d")
-        path  = BATCH_DIR / f"{today}_batch.csv"
+        # today = datetime.now().strftime("%Y%m%d")
+        # path  = BATCH_DIR / f"{today}_batch.csv"
+        path  = "batch.csv"
         net_new.to_csv(path, index=False, encoding="utf-8-sig")
         log.info("Batch saved → %s", path)
 
+    def save_drift_data(self, drift_data: list[dict]):
+        if len(drift_data)==0:
+            return
+        # today = datetime.now().strftime("%Y%m%d")
+        path = "drift_stats.json"
+        # path  = DRIFT_STATS_DIR / f"{today}_drift_stats.json"
+        with open(path,"w",encoding="utf-8") as f:
+              json.dump(drift_data,f,indent=4)
+        log.info("Drift Stats saved → %s", path)
 
-# ═════════════════════════════════════════════════════════════════════════════
+
 def main():
     scraper = Scraper()
     batch   = scraper.run()
-    net_new = scraper.merge_with_master(batch)
+    master,net_new = scraper.check_batch(batch)
     scraper.save_batch(net_new)
-
-    log.info("=" * 60)
-    log.info("Done. %d net-new reviews added to master.", len(net_new))
-    log.info("=" * 60)
-    # end of main() in scraper.py
-    log.info("COMMIT_MSG: data: pipeline run %s (+%d reviews, %d skipped)",
-         datetime.now().strftime("%Y-%m-%d"), len(net_new), len(batch) - len(net_new))
+    if scraper.feature_drifted == False:
+        scraper.merge_with_master(master,net_new)
+        log.info("=" * 60)
+        log.info("Done. %d net-new reviews added to master.", len(net_new))
+        log.info("=" * 60)
+        log.info("COMMIT_MSG: data: pipeline run %s (+%d reviews, %d skipped)",
+            datetime.now().strftime("%Y-%m-%d"), len(batch), len(batch) - len(net_new))
 
 
 if __name__ == "__main__":
