@@ -32,3 +32,9 @@ jobs:
           echo "Listing releases/..."
           aws s3 ls \
             s3://indian-ev-scooter-sentiment-analysis-portfolio/releases/
+
+      - name: Test CP
+        run: |
+         echo "Testing write access"
+         aws s3 cp logs/application.log s3://${SECRETS.BUCKET_NAME}/latest/application.log
+         echo "Push done check from aws side"
