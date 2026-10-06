@@ -36,5 +36,5 @@ jobs:
       - name: Test CP
         run: |
          echo "Testing write access"
-         aws s3 cp logs/application.log s3://${SECRETS.BUCKET_NAME}/latest/application.log
+         aws s3 cp logs/application.log s3://${{ secrets.S3_BUCKET }}/latest/application.log
          echo "Push done check from aws side"
