@@ -13,11 +13,11 @@ log = get_logger(__name__)
 import importlib.util
 import data_quality_ch as dqc
 
-file_path = Path(__file__).parent.parent / "utils" / "s3_loader.py"
-spec = importlib.util.spec_from_file_location("s3_loader", file_path)
-module = importlib.util.module_from_spec(spec)
-spec.loader.exec_module(module)
-loader_csv = module.load_s3_csv
+# file_path = Path(__file__).parent.parent / "utils" / "s3_loader.py"
+# spec = importlib.util.spec_from_file_location("s3_loader", file_path)
+# module = importlib.util.module_from_spec(spec)
+# spec.loader.exec_module(module)
+# loader_csv = module.load_s3_csv
 
 
 
