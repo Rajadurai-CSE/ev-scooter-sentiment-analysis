@@ -10,7 +10,6 @@ log = get_logger(__name__)
 
 BASE_DIR   = Path(__file__).parent.parent
 DATA_DIR   = BASE_DIR / "data"
-MASTER_DATA_PATH= DATA_DIR / "master_reviews.csv"
 DRIFT_STATISTICS = DATA_DIR/"drift_statistics.csv"
 
 sources = ["91wheels","bikewale","bikedekho"]
@@ -29,16 +28,10 @@ def calculate_psi(master_df:pd.DataFrame,df:pd.DataFrame,column:str) -> float:
 
     unique_df_ele = set(master_df[column].unique()).union(set(df[column].unique()))
     psi = 0
-    # master_df_len = len(master_df)
-    # df_len = len(df)
     epsilon = 1e-3
-    log.info("Brand {brand}".format(brand = df['brand'].iloc[0]))
     for i in unique_df_ele:
         expected =(master_df[column] == i).mean()
         actual =(df[column] == i).mean()
-        # log.info("Category {category}".format(category = i))
-        # log.info("Expected {expected}".format(expected = expected))
-        # log.info("Actual {actual}".format(actual = actual))
         expected = max(expected,epsilon)
         actual = max(actual,epsilon)
         ##PSI
@@ -49,13 +42,16 @@ def calculate_psi(master_df:pd.DataFrame,df:pd.DataFrame,column:str) -> float:
     
 
 #1. Data Drift
-def detect_data_drift(df:pd.DataFrame)->list[dict]:
-    master_df = pd.read_csv(MASTER_DATA_PATH)
+def detect_data_drift(master_df:pd.DataFrame,df:pd.DataFrame)->list[dict]:
+
     log.info("Started Data Drift Check ...")
 
     drift_statistics = []
 
     for key,value in BRAND_MAP.items():
+
+        log.info("Brand : {brand} Model : {model}".format(brand=key,model=value))
+
         master_subset = master_df[(master_df['brand'] == key)&(master_df['model']==value)]
         subset = df[(df['brand'] == key)&(df['model']==value)]
         #detect drift based on source
@@ -64,11 +60,15 @@ def detect_data_drift(df:pd.DataFrame)->list[dict]:
         # _91wheels_src = subset[subset['source'] == '91wheels']
         # bikedekho_src = subset[subset['source'] == 'bikedekho']
 
-        psi = calculate_psi(master_subset[master_subset['source'] == 'bikewale'],bikewale_src,'rating')
-        if psi>=0.25:
-            log.info("Significant Drift Detected by PSI Test - source: Bikewale - brand: {brand} model: {model} psi-score: {psi}".format(brand = key,model = value,psi=psi))
+        if len(bikewale_src)!=0:
+            psi = calculate_psi(master_subset[master_subset['source'] == 'bikewale'],bikewale_src,'rating')
+            if psi>=0.25:
+                log.info("Significant Drift Detected by PSI Test - source: Bikewale - brand: {brand} model: {model} psi-score: {psi}".format(brand = key,model = value,psi=psi))
+            else:
+                log.info("Data Drift is not detected - source : Bikewale - brand: {brand} model: {model} psi-score: {psi}".format(brand = key,model = value,psi=psi))
         else:
-            log.info("Data Drift is not detected - source : Bikewale - brand: {brand} model: {model} psi-score: {psi}".format(brand = key,model = value,psi=psi))
+            log.info("Empty dataframe received for psi test, skipping psi ..")
+            psi = "skipped"
 
         drift_statistics.append({
             "brand":key,
@@ -76,24 +76,35 @@ def detect_data_drift(df:pd.DataFrame)->list[dict]:
             "source":"bikewale",
             "psi_score":psi})
 
-        res = ks_2samp(master_subset[(master_subset['source'] == 'bikedekho') | (master_subset['source'] == '91wheels')]['rating'],subset[(subset['source'] == 'bikedekho') | (subset['source'] == '91wheels')]['rating'])
-        if res.pvalue<=0.05:
-            log.info("Significant Drift Detected by KS Test - source: BikeDekho and 91wheels - brand: {brand} model: {model} ks-score: {ks} pvalue: {pvalue}".format(brand = key,model = value,ks=res.statistic, pvalue = res.pvalue))
+
+
+        if len(subset[(subset['source'] == 'bikedekho') | (subset['source'] == '91wheels')])!=0:
+            res = ks_2samp(master_subset[(master_subset['source'] == 'bikedekho') | (master_subset['source'] == '91wheels')]['rating'],subset[(subset['source'] == 'bikedekho') | (subset['source'] == '91wheels')]['rating'])
+            statistic = res.statistic
+            pvalue = res.pvalue
+            if res.pvalue<=0.05:
+                log.info("Significant Drift Detected by KS Test - source: BikeDekho and 91wheels - brand: {brand} model: {model} ks-score: {ks} pvalue: {pvalue}".format(brand = key,model = value,ks=res.statistic, pvalue = res.pvalue))
+            else:
+                log.info("Data Drift is not detected - source: BikeDekho and 91wheels -  brand: {brand} model: {model} ks-score: {ks} pvalue: {pvalue}".format(brand = key,model = value,ks = res.statistic,pvalue = res.pvalue))
         else:
-            log.info("Data Drift is not detected - source: BikeDekho and 91wheels -  brand: {brand} model: {model} ks-score: {ks} pvalue: {pvalue}".format(brand = key,model = value,ks = res.statistic,pvalue = res.pvalue))
+            log.info("Empty DataFrame received for ks2samp test, skipping ks2samp")
+            statistic = ""
+            pvalue = ""
+
 
         drift_statistics.append({
             "brand":key,
             "model":value,
             "source":"91wheels/bikedekho",
-            "k_statistic":res.statistic,
-            "p_value": res.pvalue})
+            "k_statistic":statistic,
+            "p_value": pvalue})
 
     return drift_statistics
 
 
 
 def feature_drift(df:pd.DataFrame) -> bool:
+
 
     # 1. Rating Drift (Based on min and max)
     min_subset_rating = df['rating'].min()

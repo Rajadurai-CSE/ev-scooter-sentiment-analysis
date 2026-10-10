@@ -10,14 +10,23 @@ from datetime import datetime, timedelta
 from bs4 import BeautifulSoup
 from log_manager.logger import get_logger
 log = get_logger(__name__)
-
+import importlib.util
 import data_quality_ch as dqc
+
+file_path = Path(__file__).parent.parent / "utils" / "s3_loader.py"
+spec = importlib.util.spec_from_file_location("s3_loader", file_path)
+module = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(module)
+loader_csv = module.load_s3_csv
+
+
 
 BASE_DIR    = Path(__file__).parent.parent
 DATA_DIR    = BASE_DIR / "data"
-# BATCH_DIR   = DATA_DIR / "batches"
 MASTER_PATH = DATA_DIR / "master_reviews.csv"
-# DRIFT_STATS_DIR = DATA_DIR/"drift_stats"
+CLEANED_DF_PATH= DATA_DIR / "clean_reviews.csv"
+BATCH_DF_PATH = DATA_DIR/"batch.csv"
+DRIFT_STATS_PATH = DATA_DIR/"drift_stats.json"
 
 DATA_DIR.mkdir(exist_ok=True)
 # BATCH_DIR.mkdir(exist_ok=True)
@@ -71,10 +80,16 @@ class Scraper:
     }
 
 
+    # MAX_PAGES = {
+    #     "91wheels":  40,
+    #     "bikewale":  25,
+    #     "bikedekho": 18,
+    # }
+    
     MAX_PAGES = {
-        "91wheels":  40,
-        "bikewale":  25,
-        "bikedekho": 18,
+        "91wheels":  1,
+        "bikewale":  1,
+        "bikedekho": 1,
     }
 
     WHEELS91_TAGS = {
@@ -124,6 +139,14 @@ class Scraper:
         """Stable unique ID per review — used for deduplication across runs."""
         raw = f"{source}::{user_name.lower().strip()}::{review_text[:100].strip()}"
         return hashlib.md5(raw.encode()).hexdigest()
+
+    # def fetch_data_from_s3(self):
+    #     master_df = loader_csv("latest/master_reviews.csv")
+    #     cleaned_df = loader_csv("latest/clean_reviews.csv")
+
+    #     master_df.to_csv(MASTER_PATH, index=False, encoding="utf-8-sig")
+    #     cleaned_df.to_csv(CLEANED_DF_PATH, index=False, encoding="utf-8-sig")
+    #     log.info("Successfully loaded the Master and Clean Reviews Dataframe from s3")
 
 
     def _scrape_91wheels(self, url_template: str, model: str) -> pd.DataFrame:
@@ -313,6 +336,9 @@ class Scraper:
         log.info("EV Scraper — run date: %s", self.scraped_at)
         log.info("=" * 60)
 
+        log.info("Loading Data From S3")
+        # self.fetch_data_from_s3()
+
         all_dfs = []
 
         for model, (url_91, url_bw, url_bd) in self.MODELS.items():
@@ -338,21 +364,25 @@ class Scraper:
         batch = pd.concat(all_dfs, ignore_index=True)
         batch = self._clean_batch(batch)
 
-        #If master path exists
         if Path.exists(MASTER_PATH) and len(pd.read_csv(MASTER_PATH)) > 0:
+            master = pd.read_csv(MASTER_PATH)
             log.info("Started Drift detection ...")
             existing_ids = set(master["review_id"])
             net_new = batch[~batch["review_id"].isin(existing_ids)]
             #2. Drift detection ...
-            feature_drift = dqc.feature_drift(net_new)
-            if feature_drift:
-                self.feature_drifted = True
+            if len(net_new) !=0:
+                feature_drift = dqc.feature_drift(net_new)
+                if feature_drift:
+                    self.feature_drifted = True
+                else:
+                    log.info("No Feature Drift detected.. proceeding to data drift")
+                    #Run data drift detection
+                    data_drift_stats = dqc.detect_data_drift(master,net_new)
+                    log.info("Going to save Drift stats")
+                    self.save_drift_data(data_drift_stats)
+
             else:
-                log.info("No Feature Drift detected.. proceeding to data drift")
-                #Run data drift detection
-                data_drift_stats = dqc.detect_data_drift(net_new)
-                log.info("Going to save Drift stats")
-                self.save_drift_data(data_drift_stats)
+                log.info("Empty Dataframe received for drift detection, skipping drift detection")
 
 
         return batch
@@ -423,7 +453,7 @@ class Scraper:
             return
         # today = datetime.now().strftime("%Y%m%d")
         # path  = BATCH_DIR / f"{today}_batch.csv"
-        path  = "batch.csv"
+        path  = BATCH_DF_PATH
         net_new.to_csv(path, index=False, encoding="utf-8-sig")
         log.info("Batch saved → %s", path)
 
@@ -431,7 +461,7 @@ class Scraper:
         if len(drift_data)==0:
             return
         # today = datetime.now().strftime("%Y%m%d")
-        path = "drift_stats.json"
+        path = DRIFT_STATS_PATH
         # path  = DRIFT_STATS_DIR / f"{today}_drift_stats.json"
         with open(path,"w",encoding="utf-8") as f:
               json.dump(drift_data,f,indent=4)
