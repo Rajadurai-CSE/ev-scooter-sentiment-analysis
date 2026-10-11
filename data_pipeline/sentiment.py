@@ -20,7 +20,7 @@ OUTPUT_PATH= DATA_DIR / "sentiment_reviews.csv"
 VAL_DIR.mkdir(parents=True, exist_ok=True)
 
 
-MODEL_NAME = "cardiffnlp/twitter-roberta-base-sentiment-latest"
+MODEL_NAME = "airzipm/sentiment-analysis-muril-v2"
 BATCH_SIZE = 32        
 MAX_TOKENS = 512       
 

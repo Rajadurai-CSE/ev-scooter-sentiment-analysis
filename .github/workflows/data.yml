@@ -65,6 +65,11 @@ jobs:
             aws s3 cp \
             "s3://${S3_BUCKET}/latest/clean_reviews.csv" \
             "data/clean_reviews.csv"
+          
+          echo "Downloading sentiment_reviews.csv..."
+            aws s3 cp \
+            "s3://${S3_BUCKET}/latest/sentiment_reviews.csv" \
+            "data/sentiment_reviews.csv"
 
 
       - name: Run scraper
