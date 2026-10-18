@@ -80,17 +80,12 @@ class Scraper:
     }
 
 
-    # MAX_PAGES = {
-    #     "91wheels":  40,
-    #     "bikewale":  25,
-    #     "bikedekho": 18,
-    # }
-    
     MAX_PAGES = {
-        "91wheels":  1,
-        "bikewale":  1,
-        "bikedekho": 1,
+        "91wheels":  40,
+        "bikewale":  25,
+        "bikedekho": 18,
     }
+    
 
     WHEELS91_TAGS = {
         "user_name":   "span.text-sm.text-darkblack\\/80",
