@@ -26,10 +26,6 @@ st.markdown(
        PAGE
        ================================================================ */
 
-    .stApp {
-        background: #eef4fb;
-    }
-
     .main .block-container {
         max-width: 1600px;
         padding-top: 1.1rem;
@@ -51,17 +47,13 @@ st.markdown(
        SIDEBAR
        ================================================================ */
 
-    section[data-testid="stSidebar"] {
-        background: #ffffff;
-        border-right: 1px solid #dfe7f0;
-    }
 
     section[data-testid="stSidebar"] > div {
         padding-top: 1.2rem;
     }
 
     section[data-testid="stSidebar"] h2 {
-        color: #18324b;
+        # color: #18324b;
         font-size: 1.15rem;
         font-weight: 700;
     }
@@ -72,17 +64,12 @@ st.markdown(
         margin: 0.8rem 0 1.1rem;
     }
 
-    section[data-testid="stSidebar"] label {
-        color: #536273 !important;
-        font-size: 0.78rem !important;
-        font-weight: 600 !important;
-    }
+    # section[data-testid="stSidebar"] label {
+    #     color: #536273 !important;
+    #     font-size: 0.78rem !important;
+    #     font-weight: 600 !important;
+    # }
 
-    section[data-testid="stSidebar"] [data-baseweb="select"] > div {
-        background: #f8fafc;
-        border: 1px solid #dce5ef;
-        border-radius: 8px;
-    }
 
     .sidebar-brand {
         display: flex;
@@ -110,14 +97,12 @@ st.markdown(
     }
 
     .sidebar-title {
-        color: #172b3f;
         font-size: 17px;
         font-weight: 750;
         line-height: 1.1;
     }
 
     .sidebar-subtitle {
-        color: #7c8b9b;
         font-size: 10px;
         margin-top: 2px;
         letter-spacing: 0.08em;
@@ -229,12 +214,14 @@ st.markdown(
         margin-right: 5px;
     }
 
+    
+    
     /* ================================================================
        SECTION HEADERS
        ================================================================ */
 
     .section-header {
-        color: #26394d;
+        # color: #26394d;
         font-size: 16px;
         font-weight: 750;
         margin: 18px 2px 9px 2px;
@@ -242,7 +229,7 @@ st.markdown(
     }
 
     .section-header span {
-        color: #8b98a7;
+        # color: #8b98a7;
         font-size: 11px;
         font-weight: 500;
         margin-left: 7px;
@@ -444,42 +431,6 @@ st.markdown(
     }
 
     /* ================================================================
-       SELECT BOX
-       ================================================================ */
-
-       div[data-baseweb="select"] > div {
-    background: linear-gradient(
-        135deg,
-        #d9edff,
-        #c6e3ff
-    ) !important;
-
-    border: 1px solid #82baf0 !important;
-    border-radius: 9px !important;
-
-    box-shadow: 0 2px 5px rgba(60, 130, 200, 0.10) !important;
-}
-
-div[data-baseweb="select"] span {
-    color: #075a9c !important;
-    font-weight: 650 !important;
-}
-
-div[data-baseweb="select"] svg {
-    fill: #075a9c !important;
-}
-
-div[data-baseweb="select"] > div:hover {
-    background: linear-gradient(
-        135deg,
-        #cde7ff,
-        #b9dcfa
-    ) !important;
-
-    border-color: #5fa5e8 !important;
-}
-
-    /* ================================================================
        SMALL TEXT
        ================================================================ */
 
@@ -507,6 +458,7 @@ div[data-baseweb="select"] > div:hover {
                 #6930a7
             );
     }
+    
 
     </style>
     """,
@@ -582,7 +534,6 @@ def load_insights():
 # ══════════════════════════════════════════════════════════════════════════════
 
 df_full = load_sentiment()
-print("Dtypes",df_full.dtypes)
 topic_full = load_topics()
 insights = load_insights()
 
@@ -595,7 +546,6 @@ with st.sidebar:
     st.markdown(
         """
         <div class="sidebar-brand">
-           <!-- <div class="sidebar-icon">⚡</div> --!>
             <div>
                 <div class="sidebar-title">EV Analytics</div>
                 <div class="sidebar-subtitle">Review Intelligence</div>
@@ -1297,8 +1247,7 @@ if is_single_brand and is_single_model:
         with a4:
             st.markdown(kpi_card("Negative",f"{sd['negative']['pct']}%",f"{sd['negative']['count']} reviews","pink"),unsafe_allow_html=True)
 
-        st.markdown(f"""<div class="insight-card">{entry["overall_summary"]}</div>""",unsafe_allow_html=True)
-
+        st.markdown(f"""<br> <div class="insight-card">{entry["overall_summary"]}</div>""",unsafe_allow_html=True)
 
 
         # ══════════════════════════════════════════════════════════════════════
@@ -1351,11 +1300,20 @@ if is_single_brand and is_single_model:
                         )
                     )
                 )
+                # _LAYOUT = dict(
+                #     paper_bgcolor="rgba(0,0,0,0)",
+                #     plot_bgcolor="rgba(0,0,0,0)",
+                #     font=dict(family="sans-serif", size=13),
+                #     margin=dict(l=10, r=10, t=36, b=10),
+                #     legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+                # )
+
                 fig_w.update_layout(
+
                     height=210,
                     showlegend=False,
-                    paper_bgcolor="#ffffff",
-                    plot_bgcolor="#ffffff",
+                    paper_bgcolor="rgba(0,0,0,0)",
+                    plot_bgcolor="rgba(0,0,0,0)",
                     margin=dict(
                         l=0,
                         r=0,
@@ -1377,15 +1335,12 @@ if is_single_brand and is_single_model:
                     ),
                     yaxis=dict(
                         visible=False
-                    )
+                    ),
                 )
 
                 with card_start():
                     st.plotly_chart(fig_w,width="stretch",config={"displayModeBar": False})
 
-            # ══════════════════════════════════════════════════════════════════
-            # REVIEWS
-            # ══════════════════════════════════════════════════════════════════
 
             st.markdown(f"**Reviews in '{sel_cluster}'**")
             cluster_reviews = tdf[tdf["cluster_label"]== cluster["raw_label"]]if not tdf.empty else pd.DataFrame()
@@ -1411,36 +1366,9 @@ if is_single_brand and is_single_model:
         else:
             st.info("No clusters found for this selection.")
 
-    # elif is_single_source:
-
-    #     st.info(
-    #         "Run `python ai_insights.py` "
-    #         "to generate AI summaries for this selection."
-    #     )
-    # else:
-    #             st.info(
-    #         "Run `python ai_insights.py` "
-    #         "to generate AI summaries for this selection."
-    #     )
-
-    # ══════════════════════════════════════════════════════════════════════════
-    # ALL REVIEWS
-    # ══════════════════════════════════════════════════════════════════════════
 
     section("Reviews","inspect the underlying data")
     sent_filter = st.selectbox("Filter by sentiment",["All","positive","neutral","negative"])
-
-    # show_df = (
-
-    #     df
-
-    #     if sent_filter == "All"
-
-    #     else df[
-    #         df["final_label"]
-    #         == sent_filter
-    #     ]
-    # )
 
     show_df = tdf if sent_filter == "All" else tdf[tdf["final_label"]== sent_filter]
     review_columns = ["user_name","review_text_en","rating","final_label","model_conf","blend_tier","posted_date","source"]
