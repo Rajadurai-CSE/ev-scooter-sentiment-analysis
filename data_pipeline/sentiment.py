@@ -1,6 +1,8 @@
+import os
+import requests
 import json
+import html
 import warnings
-import numpy as np
 import pandas as pd
 from pathlib import Path
 from datetime import datetime
@@ -8,6 +10,10 @@ from transformers import pipeline as hf_pipeline
 import asyncio
 from googletrans import Translator
 from log_manager.logger import get_logger
+GOOGLE_TRANSLATE_URL = (
+    "https://translation.googleapis.com/language/translate/v2"
+)
+TRANSLATE_BATCH_SIZE = 10
 log = get_logger(__name__)
 warnings.filterwarnings("ignore")
 
@@ -20,7 +26,7 @@ OUTPUT_PATH= DATA_DIR / "sentiment_reviews.csv"
 VAL_DIR.mkdir(parents=True, exist_ok=True)
 
 
-MODEL_NAME = "airzipm/sentiment-analysis-muril-v2"
+MODEL_NAME = "cardiffnlp/twitter-roberta-base-sentiment-latest"
 BATCH_SIZE = 32        
 MAX_TOKENS = 512       
 
@@ -59,10 +65,71 @@ def confidence_blend(
 
     return final_label, tier
 
+
+def _translate_batch(texts):
+
+    api_key = os.environ.get("GOOGLE_TRANSLATE_API_KEY")
+
+    if not api_key:
+        raise RuntimeError("GOOGLE_TRANSLATE_API_KEY is not configured")
+
+    response = requests.post(
+        GOOGLE_TRANSLATE_URL,
+        params={"key": api_key},
+        json={
+            "q": texts,
+            "target": "en",
+            "format": "text",
+        },
+        timeout=30,
+    )
+
+    response.raise_for_status()
+
+    translations = response.json()["data"]["translations"]
+
+    return [
+        html.unescape(item["translatedText"])
+        for item in translations
+    ]
+
+
 async def translate_to_english(texts):
-    tasks = [translator.translate(text, dest="en") for text in texts]
-    results = await asyncio.gather(*tasks)
-    return [r.text for r in results]
+
+    if not texts:
+        return []
+
+    results = []
+
+    for start in range(0, len(texts), TRANSLATE_BATCH_SIZE):
+        batch = texts[start:start + TRANSLATE_BATCH_SIZE]
+
+        try:
+            translated = await asyncio.to_thread(
+                _translate_batch, batch
+            )
+
+            if len(translated) != len(batch):
+                raise ValueError("Translation count does not match input")
+
+            results.extend(translated)
+
+        except Exception as exc:
+            log.info(
+                "Translation failed for batch starting at index %d: %s. "
+                "Using original reviews.",
+                start,
+                exc,
+            )
+            results.extend(batch)
+
+    return results
+
+
+# async def translate_to_english(texts):
+#     tasks = [translator.translate(text, dest="en") for text in texts]
+#     results = await asyncio.gather(*tasks)
+#     return [r.text for r in results]
 
 
 def load_model():

@@ -122,23 +122,27 @@ jobs:
         run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
 
 
+
       - name: Upload data to S3 Releases
         run: |
           echo "Uploading files in data dir to releases dir in s3 ..."
-          aws s3 cp data/ s3://${S3_BUCKET}/releases/${steps.date.output.CURRENT_DATE}/ --recursive
+          aws s3 cp data/ "s3://${S3_BUCKET}/releases/${{ steps.date.outputs.CURRENT_DATE }}/" --recursive
+
+
+
 
       - name: Upload log data to S3 Releases
         run: |
           echo "Uploading files in data dir to releases dir in s3 ..."
-          aws s3 cp logs/application.log s3://${S3_BUCKET}/releases/${steps.date.output.CURRENT_DATE}/application.log
+          aws s3 cp logs/application.log "s3://${S3_BUCKET}/releases/${{ steps.date.outputs.CURRENT_DATE }}/application.log"
 
       - name: Upload data to S3 Latest 
         run: |
           echo "Uploading files in data dir to latest dir in s3 ..."
-          aws s3 cp data/ s3://${S3_BUCKET}/latest/ --recursive
+          aws s3 cp data/ "s3://${S3_BUCKET}/latest/" --recursive
 
 
-      - name: Publish READY marker
+      - name: Publish READY marker 
         run: |
           printf "ready\n" > _READY
 
