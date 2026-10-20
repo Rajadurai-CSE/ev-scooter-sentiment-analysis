@@ -52,7 +52,7 @@ jobs:
             --instance-ids "$EC2_INSTANCE_ID" \
             --comment "Deploy Streamlit app - ${GITHUB_SHA}" \
             --parameters 'commands=[
-              "sudo -u ubuntu -H bash -lc '\''cd /home/ubuntu/ev-scooter-sentiment-analysis && git fetch origin main && git restore --source=origin/main --worktree -- app.py requirements.txt resources/ utils/'\''",
+              "sudo -u ubuntu -H bash -lc '\''cd /home/ubuntu/ev-scooter-sentiment-analysis && git fetch --quiet origin main && git restore --source=origin/main --worktree -- app.py requirements.txt resources/ utils/'\''",
               "systemctl restart streamlit",
               "systemctl is-active --quiet streamlit"
               ]' \
