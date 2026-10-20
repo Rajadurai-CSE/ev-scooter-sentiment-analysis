@@ -1132,8 +1132,8 @@ if is_single_brand and is_single_model:
 
         fig_sc.update_layout(
             height=650,
-            paper_bgcolor="#ffffff",
-            plot_bgcolor="#fbfcfe",
+            # paper_bgcolor="#ffffff",
+            # plot_bgcolor="#fbfcfe",
             margin=dict(
                 l=62,
                 r=270,
@@ -1159,7 +1159,7 @@ if is_single_brand and is_single_model:
                 y=1,
                 xanchor="left",
                 x=1.02,
-                bgcolor=("rgba(255,255,255,0.95)"),
+                # bgcolor=("rgba(255,255,255,0.95)"),
                 bordercolor="#dce4ec",
                 borderwidth=1,
                 font=dict(size=10)
