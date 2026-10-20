@@ -53,7 +53,6 @@ jobs:
             --comment "Deploy Streamlit app - ${GITHUB_SHA}" \
             --parameters 'commands=[
               "sudo -u ubuntu -H bash -lc '\''cd /home/ubuntu/ev-scooter-sentiment-analysis && git fetch origin main && git restore --source=origin/main --worktree -- app.py requirements.txt resources/ utils/'\''",
-              "sudo -u ubuntu -H /home/ubuntu/ev-scooter-sentiment-analysis/.venv/bin/pip install -r /home/ubuntu/ev-scooter-sentiment-analysis/requirements.txt",
               "systemctl restart streamlit",
               "systemctl is-active --quiet streamlit"
               ]' \
