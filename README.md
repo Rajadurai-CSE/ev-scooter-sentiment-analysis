@@ -4,8 +4,6 @@ An end-to-end NLP and AI application that consolidates public electric-scooter r
 
 <p align="center">
   <a href="https://indian-ev-scooter-dashboard.duckdns.org/"><strong>🌐 Open the Live Dashboard</strong></a>
-  &nbsp; | &nbsp;
-  <a href="https://github.com/Rajadurai-CSE/ev-scooter-sentiment-analysis"><strong>💻 View the Source Code</strong></a>
 </p>
 
 ## The Problem
